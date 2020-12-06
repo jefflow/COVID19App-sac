@@ -80,7 +80,7 @@ public class HomeFragment extends Fragment {
 //
 //        listView.setAdapter(listViewAdapter);
 
-        String[] titleArray = {"title 1", "title 2", "title 3", "title 4"};
+        String[] titleArray = {"State", "fdssdf", "title 3", "title 4"};
         String[] detailArray = {"detail 1", "detail 2", "detail 3", "detail 4"};
 
         List<Map<String, String>> listArray = new ArrayList<>();
