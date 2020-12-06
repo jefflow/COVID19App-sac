@@ -4,7 +4,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
+
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,6 +16,22 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.covid19_app.R;
+
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+
+import java.util.ArrayList;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.Toast;
+
+import android.widget.Toast;
 
 public class HomeFragment extends Fragment {
 
@@ -23,13 +42,39 @@ public class HomeFragment extends Fragment {
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
+
+        //final TextView textView = root.findViewById(R.id.text_home);
+        final TextView totalView = root.findViewById(R.id.totalCasesForCurrentLocation);
+
+//        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+//            @Override
+//            public void onChanged(@Nullable String s) {
+//                textView.setText(s);
+//            }
+//        });
+
         homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                textView.setText(s);
+                totalView.setText("Hey there");
             }
         });
+
+        root = inflater.inflate(R.layout.fragment_home, container, false);
+        String[] menuItems = {"Do something", "dfjsdfkljsdf", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh"};
+
+        ListView listView = root.findViewById(R.id.listView);
+
+        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(
+                getActivity(),
+                android.R.layout.simple_list_item_1,
+                menuItems
+        );
+
+        listView.setAdapter(listViewAdapter);
+
+
         return root;
     }
+
 }
