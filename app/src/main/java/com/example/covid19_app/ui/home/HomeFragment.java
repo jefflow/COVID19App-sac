@@ -17,6 +17,10 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.covid19_app.R;
 
+import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
+
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
@@ -30,6 +34,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
+
+import android.widget.SimpleAdapter;
 
 import android.widget.Toast;
 
@@ -53,26 +59,47 @@ public class HomeFragment extends Fragment {
 //            }
 //        });
 
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                totalView.setText("Hey there");
-            }
-        });
+//        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+//            @Override
+//            public void onChanged(@Nullable String s) {
+//                totalView.setText("Hey there");
+//            }
+//        });
+        totalView.setText("Hey there");
+//
+//        //root = inflater.inflate(R.layout.fragment_home, container, false);
+//        String[] menuItems = {"Do something", "dfjsdfkljsdf", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh"};
+//
+//        ListView listView = root.findViewById(R.id.listView);
+//
+//        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(
+//                getActivity(),
+//                android.R.layout.simple_list_item_1,
+//                menuItems
+//        );
+//
+//        listView.setAdapter(listViewAdapter);
 
-        root = inflater.inflate(R.layout.fragment_home, container, false);
-        String[] menuItems = {"Do something", "dfjsdfkljsdf", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh", "sdfkjhsdfsdfh"};
+        String[] titleArray = {"title 1", "title 2", "title 3", "title 4"};
+        String[] detailArray = {"detail 1", "detail 2", "detail 3", "detail 4"};
+
+        List<Map<String, String>> listArray = new ArrayList<>();
+
+        for(int i=0; i< titleArray.length; i++)
+        {
+            Map<String, String> listItem = new HashMap<>();
+            listItem.put("titleKey", titleArray[i]);
+            listItem.put("detailKey", detailArray[i]);
+            listArray.add(listItem);
+        }
+
+        SimpleAdapter simpleAdapter = new SimpleAdapter(getActivity(), listArray,
+                android.R.layout.simple_list_item_2,
+                new String[] {"titleKey", "detailKey" },
+                new int[] {android.R.id.text1, android.R.id.text2 });
 
         ListView listView = root.findViewById(R.id.listView);
-
-        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(
-                getActivity(),
-                android.R.layout.simple_list_item_1,
-                menuItems
-        );
-
-        listView.setAdapter(listViewAdapter);
-
+        listView.setAdapter(simpleAdapter);
 
         return root;
     }
